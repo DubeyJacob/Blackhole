@@ -106,6 +106,9 @@ def main():
         (fwidth, fheight) = font.size(text)
         screen.blit(f, (5, 5))
 
+        #if ((block.rect.x, block.rect.y)) == ((player.rect.x, player.rect.y)):
+
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
