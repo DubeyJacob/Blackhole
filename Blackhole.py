@@ -2,11 +2,13 @@
 import sys, pygame, random, os
 assert sys.version_info >= (3,4), 'This script requires at least python 3.4'
 
-screen_size = (500,650)
+
+screen_size = (400,650)
 FPS = 60
 black = (0,0,0)
 white = (255,255,255)
 class Asteroid(pygame.sprite.Sprite):
+
     def __init__(self, white, size, position, direction):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.Surface(size)
@@ -18,7 +20,9 @@ class Asteroid(pygame.sprite.Sprite):
     def update(self):
         (dx,dy) = self.direction
 
+
         self.rect.y += dy
+
 
 def main():
     pygame.init()
