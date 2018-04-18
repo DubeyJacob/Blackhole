@@ -62,7 +62,8 @@ def main():
 
     spritenum -= 1
     s = 0
-
+    font = pygame.font.SysFont('arial', 24)
+    score = 0
     pposition = (random.randrange(screen_size[0]), 0)
     pydirection = pygame.mouse.get_pos()
     size = (20, 20)
@@ -94,8 +95,16 @@ def main():
             s = 0
 
 
+
         clock.tick(FPS)
         screen.fill(black)
+
+        print(s)
+        text = "Score: {0}".format(score)
+        score += 1
+        f = font.render(text, True, white)
+        (fwidth, fheight) = font.size(text)
+        screen.blit(f, (5, 5))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
