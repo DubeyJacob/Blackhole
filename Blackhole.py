@@ -7,24 +7,24 @@ FPS = 60
 black = (0,0,0)
 white = (255,255,255)
 class Asteroid(pygame.sprite.Sprite):
-	def __init__(self, white, size, position, direction):
-		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.Surface(size)
-		self.image.fill(white)
-		self.rect = self.image.get_rect()
-		(self.rect.x,self.rect.y) = position
-		self.direction = direction
+    def __init__(self, white, size, position, direction):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface(size)
+        self.image.fill(white)
+        self.rect = self.image.get_rect()
+        (self.rect.x,self.rect.y) = position
+        self.direction = direction
 
-	def update(self):
-		(dx,dy) = self.direction
+    def update(self):
+        (dx,dy) = self.direction
 
-		self.rect.y += dy
-		(WIDTH,HEIGHT) = screen_size
+        self.rect.y += dy
+        (WIDTH,HEIGHT) = screen_size
 
-		if self.rect.top > HEIGHT:
-			self.rect.bottom = 0
-		if self.rect.bottom < 0:
-			self.rect.top = HEIGHT
+        if self.rect.top > HEIGHT:
+            self.rect.bottom = 0
+        if self.rect.bottom < 0:
+            self.rect.top = HEIGHT
 def main():
     pygame.init()
     screen = pygame.display.set_mode(screen_size)
