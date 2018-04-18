@@ -2,32 +2,32 @@
 import sys, pygame, random, os
 assert sys.version_info >= (3,4), 'This script requires at least python 3.4'
 
-screen_size = (600,700)
+screen_size = (600,800)
 FPS = 60
 black = (0,0,0)
 white = (255,255,255)
 class Block(pygame.sprite.Sprite):
-	def __init__(self, white, size, position, direction):
-		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.Surface(size)
-		self.image.fill(white)
-		self.rect = self.image.get_rect()
-		(self.rect.x,self.rect.y) = position
-		self.direction = direction
+    def __init__(self, white, size, position, direction):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface(size)
+        self.image.fill(white)
+        self.rect = self.image.get_rect()
+        (self.rect.x,self.rect.y) = position
+        self.direction = direction
 
-	def update(self):
-		(dx,dy) = self.direction
-		self.rect.x += dx
-		self.rect.y += dy
-		(WIDTH,HEIGHT) = screen_size
-		if self.rect.left > WIDTH:
-			self.rect.right = 0
-		if self.rect.right < 0:
-			self.rect.left = WIDTH
-		if self.rect.top > HEIGHT:
-			self.rect.bottom = 0
-		if self.rect.bottom < 0:
-			self.rect.top = HEIGHT
+    def update(self):
+        (dx,dy) = self.direction
+        self.rect.x += dx
+        self.rect.y += dy
+        (WIDTH,HEIGHT) = screen_size
+        if self.rect.left > WIDTH:
+            self.rect.right = 0
+        if self.rect.right < 0:
+            self.rect.left = WIDTH
+        if self.rect.top > HEIGHT:
+            self.rect.bottom = 0
+        if self.rect.bottom < 0:
+            self.rect.top = HEIGHT
 def main():
     pygame.init()
     screen = pygame.display.set_mode(screen_size)
