@@ -24,6 +24,32 @@ class Asteroid(pygame.sprite.Sprite):
         self.rect.y += dy
 
 
+
+
+
+
+
+
+
+
+class Player(pygame.sprite.Sprite):
+    def __init__(self, white, size, position, direction):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface(size)
+        self.image.fill(white)
+        self.rect = self.image.get_rect()
+        (self.rect.x,self.rect.y) = position
+        self.direction = direction
+
+    def update_position(self,position):
+        (x,y) = position
+        (self.rect.x,self.rect.y) = (x,600)
+
+
+    def update(self):
+        pass
+
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(screen_size)
@@ -31,13 +57,28 @@ def main():
     clock = pygame.time.Clock()
 
     blocks = pygame.sprite.Group()
+    players = pygame.sprite.Group()
     spritenum = 5
 
     spritenum -= 1
     s = 0
 
+    pposition = (random.randrange(screen_size[0]), 0)
+    pydirection = pygame.mouse.get_pos()
+    size = (20, 20)
+    player = Player((255, 255, 255), size, pposition, pydirection)
+    players.add(player)
 
     while True:
+
+
+
+        pydirection = pygame.mouse.get_pos()
+        player.update_position(pydirection)
+
+
+
+
         while spritenum > 0:
             color = white
 
@@ -51,7 +92,7 @@ def main():
         if s == 650:
             spritenum = 1
             s = 0
-        print(s)
+
 
         clock.tick(FPS)
         screen.fill(black)
@@ -60,8 +101,11 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit(0)
+        players.update()
+        players.draw(screen)
         blocks.update()
         blocks.draw(screen)
         pygame.display.flip()
+
 if __name__ == '__main__':
     main()
