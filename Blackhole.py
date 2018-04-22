@@ -22,6 +22,16 @@ class Asteroid(pygame.sprite.Sprite):
 
 
         self.rect.y += dy
+        self.rect.x += dx
+        (WIDTH, HEIGHT) = screen_size
+        if self.rect.left > WIDTH:
+            self.rect.right = 0
+        if self.rect.right < 0:
+            self.rect.left = WIDTH
+        if self.rect.top > HEIGHT:
+            self.rect.bottom = 0
+        if self.rect.bottom < 0:
+            self.rect.top = HEIGHT
 
 
 
@@ -50,17 +60,25 @@ class Player(pygame.sprite.Sprite):
         pass
 
 
+
+
+
+
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(screen_size)
     screen_rect = screen.get_rect()
     clock = pygame.time.Clock()
-
-    blocks = pygame.sprite.Group()
+    xblocks =[]
+    yblocks = []
+    playerpos = []
+    block_group = pygame.sprite.Group()
     players = pygame.sprite.Group()
-    spritenum = 5
+    spritenum = 7
+    nohit = True
 
-    spritenum -= 1
+
     s = 0
     font = pygame.font.SysFont('arial', 24)
     score = 0
@@ -70,7 +88,7 @@ def main():
     player = Player((255, 255, 255), size, pposition, pydirection)
     players.add(player)
 
-    while True:
+    while nohit == True:
 
 
 
@@ -84,29 +102,59 @@ def main():
             color = white
 
             randomposition = (random.randrange(screen_size[0]), 0)
-            ydirection = (0, 10)
+            ydirection = (random.randrange(1,5), random.randrange(1,15))
             size = (20, 20)
             block = Asteroid(color, size, randomposition, ydirection)
-            blocks.add(block)
+            block_group.add(block)
+
+
+
+
+
             spritenum -= 1
-        s += 10
-        if s == 650:
-            spritenum = 1
-            s = 0
+
+
+        xblocks.clear()
+        yblocks.clear()
+        for b in block_group:
+
+            x_pos = b.rect.x
+            xblocks.append(x_pos)
+
+
+            y_pos = b.rect.y
+            yblocks.append(y_pos)
+
+
+
+
+
+        if (player.rect.x in xblocks or player.rect.x + 1 in xblocks or player.rect.x + 2 in xblocks or player.rect.x + 3 in xblocks or player.rect.x + 4 in xblocks or player.rect.x + 5 in xblocks or player.rect.x + 6 in xblocks or player.rect.x +7 in xblocks \
+            or player.rect.x + 8 in xblocks or player.rect.x + 10 in xblocks or player.rect.x + 11 in xblocks or player.rect.x + 12 in xblocks or player.rect.x + 13 in xblocks or player.rect.x + 14 in xblocks or player.rect.x + 15 in xblocks \
+            or player.rect.x - 1 in xblocks or player.rect.x - 2 in xblocks or player.rect.x - 3 in xblocks or player.rect.x - 4 in xblocks or player.rect.x - 5 in xblocks or player.rect.x - 6 in xblocks or player.rect.x -7 in xblocks \
+            or player.rect.x - 8 in xblocks or player.rect.x - 10 in xblocks or player.rect.x - 11 in xblocks or player.rect.x - 12 in xblocks or player.rect.x - 13 in xblocks or player.rect.x - 14 in xblocks or player.rect.x - 15 in xblocks)\
+            and (590 in yblocks or 591 in yblocks or 592 in yblocks or 593 in yblocks or 594 in yblocks or 595 in yblocks or 596 in yblocks or 597 in yblocks or 598 in yblocks or 599 in yblocks or 600 in yblocks or 601 in yblocks or 602 in yblocks \
+            or 603 in yblocks or 604 in yblocks or 605 in yblocks or 606 in yblocks or 607 in yblocks or 608 in yblocks or 609 in yblocks or 610 in yblocks):
+
+
+
+            print("Success")
 
 
 
         clock.tick(FPS)
         screen.fill(black)
 
-        print(s)
+
         text = "Score: {0}".format(score)
         score += 1
         f = font.render(text, True, white)
         (fwidth, fheight) = font.size(text)
         screen.blit(f, (5, 5))
 
-        #if ((block.rect.x, block.rect.y)) == ((player.rect.x, player.rect.y)):
+
+        #print(xblocks, yblocks)
+        #print(player.rect.x)
 
 
         for event in pygame.event.get():
@@ -115,8 +163,8 @@ def main():
                 sys.exit(0)
         players.update()
         players.draw(screen)
-        blocks.update()
-        blocks.draw(screen)
+        block_group.update()
+        block_group.draw(screen)
         pygame.display.flip()
 
 if __name__ == '__main__':
