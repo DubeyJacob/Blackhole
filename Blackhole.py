@@ -77,6 +77,7 @@ def main():
     players = pygame.sprite.Group()
     spritenum = 7
     nohit = True
+    z = 0
 
 
     s = 0
@@ -136,9 +137,9 @@ def main():
             and (590 in yblocks or 591 in yblocks or 592 in yblocks or 593 in yblocks or 594 in yblocks or 595 in yblocks or 596 in yblocks or 597 in yblocks or 598 in yblocks or 599 in yblocks or 600 in yblocks or 601 in yblocks or 602 in yblocks \
             or 603 in yblocks or 604 in yblocks or 605 in yblocks or 606 in yblocks or 607 in yblocks or 608 in yblocks or 609 in yblocks or 610 in yblocks):
 
+            z += 1
 
-
-            print("Success")
+            print(z)
 
 
 
