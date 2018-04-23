@@ -89,84 +89,115 @@ def main():
     player = Player((255, 255, 255), size, pposition, pydirection)
     players.add(player)
 
-    while nohit == True:
+    while True:
+
+        while nohit == True:
 
 
 
-        pydirection = pygame.mouse.get_pos()
-        player.update_position(pydirection)
-
-
-
-
-        while spritenum > 0:
-            color = white
-
-            randomposition = (random.randrange(screen_size[0]), 0)
-            ydirection = (random.randrange(1,5), random.randrange(1,15))
-            size = (20, 20)
-            block = Asteroid(color, size, randomposition, ydirection)
-            block_group.add(block)
+            pydirection = pygame.mouse.get_pos()
+            player.update_position(pydirection)
 
 
 
 
+            while spritenum > 0:
+                color = white
 
-            spritenum -= 1
-
-
-        xblocks.clear()
-        yblocks.clear()
-        for b in block_group:
-
-            x_pos = b.rect.x
-            xblocks.append(x_pos)
-
-
-            y_pos = b.rect.y
-            yblocks.append(y_pos)
+                randomposition = (random.randrange(screen_size[0]), 0)
+                ydirection = (random.randrange(3,5),random.randrange(3,15))
+                size = (20, 20)
+                block = Asteroid(color, size, randomposition, ydirection)
+                block_group.add(block)
 
 
 
 
 
-        if (player.rect.x in xblocks or player.rect.x + 1 in xblocks or player.rect.x + 2 in xblocks or player.rect.x + 3 in xblocks or player.rect.x + 4 in xblocks or player.rect.x + 5 in xblocks or player.rect.x + 6 in xblocks or player.rect.x +7 in xblocks \
-            or player.rect.x + 8 in xblocks or player.rect.x + 10 in xblocks or player.rect.x + 11 in xblocks or player.rect.x + 12 in xblocks or player.rect.x + 13 in xblocks or player.rect.x + 14 in xblocks or player.rect.x + 15 in xblocks \
-            or player.rect.x - 1 in xblocks or player.rect.x - 2 in xblocks or player.rect.x - 3 in xblocks or player.rect.x - 4 in xblocks or player.rect.x - 5 in xblocks or player.rect.x - 6 in xblocks or player.rect.x -7 in xblocks \
-            or player.rect.x - 8 in xblocks or player.rect.x - 10 in xblocks or player.rect.x - 11 in xblocks or player.rect.x - 12 in xblocks or player.rect.x - 13 in xblocks or player.rect.x - 14 in xblocks or player.rect.x - 15 in xblocks)\
-            and (590 in yblocks or 591 in yblocks or 592 in yblocks or 593 in yblocks or 594 in yblocks or 595 in yblocks or 596 in yblocks or 597 in yblocks or 598 in yblocks or 599 in yblocks or 600 in yblocks or 601 in yblocks or 602 in yblocks \
-            or 603 in yblocks or 604 in yblocks or 605 in yblocks or 606 in yblocks or 607 in yblocks or 608 in yblocks or 609 in yblocks or 610 in yblocks):
-
-            z += 1
-
-            print(z)
+                spritenum -= 1
 
 
+            xblocks.clear()
+            yblocks.clear()
+            for b in block_group:
 
-        clock.tick(FPS)
-        screen.fill(black)
-
-
-        text = "Score: {0}".format(score)
-        score += 1
-        f = font.render(text, True, white)
-        (fwidth, fheight) = font.size(text)
-        screen.blit(f, (5, 5))
+                x_pos = b.rect.x
+                xblocks.append(x_pos)
 
 
-        #print(xblocks, yblocks)
-        #print(player.rect.x)
+                y_pos = b.rect.y
+                yblocks.append(y_pos)
 
 
+
+
+
+            '''if (player.rect.x in xblocks or player.rect.x + 1 in xblocks or player.rect.x + 2 in xblocks or player.rect.x + 3 in xblocks or player.rect.x + 4 in xblocks or player.rect.x + 5
+                or player.rect.x - 1 in xblocks or player.rect.x - 2 in xblocks or player.rect.x - 3 in xblocks or player.rect.x - 4 in xblocks or player.rect.x - 5 in xblocks)\
+                and (595 in yblocks or 596 in yblocks or 5910 in yblocks or 598 in yblocks or 599 in yblocks or 600 in yblocks or 601 in yblocks or 602 in yblocks
+                or 603 in yblocks or 604 in yblocks or 605 in yblocks):'''
+
+
+            if xblocks[0]-18 < player.rect.x < xblocks[0]+18 and yblocks[0]-18 < 600 < yblocks[0]+18 or xblocks[0]-18 < player.rect.x < xblocks[0]+18 and yblocks[0]-18 < 600 < yblocks[0]+18 or \
+                xblocks[1] - 18 < player.rect.x < xblocks[1] + 18 and yblocks[1] - 18 < 600 < yblocks[1] + 18 or xblocks[1]-18 < player.rect.x < xblocks[1]+18 and yblocks[1]-18 < 600 < yblocks[1]+18 or \
+                xblocks[2] - 18 < player.rect.x < xblocks[2] + 18 and yblocks[2] - 18 < 600 < yblocks[2] + 18 or xblocks[2]-18 < player.rect.x < xblocks[2]+18 and yblocks[2]-18 < 600 < yblocks[2]+18 or \
+                xblocks[3] - 18 < player.rect.x < xblocks[3] + 18 and yblocks[3] - 18 < 600 < yblocks[3] + 18 or xblocks[3]-18 < player.rect.x < xblocks[3]+18 and yblocks[3]-18 < 600 < yblocks[3]+18 or \
+                xblocks[4] - 18 < player.rect.x < xblocks[4] + 18 and yblocks[4] - 18 < 600 < yblocks[4] + 18 or xblocks[4] - 18 < player.rect.x < xblocks[4] + 18 and yblocks[4] - 18 < 600 < yblocks[4] + 18 or \
+                xblocks[5] - 18 < player.rect.x < xblocks[5] + 18 and yblocks[5] - 18 < 600 < yblocks[5] + 18 or xblocks[5] - 18 < player.rect.x < xblocks[5] + 18 and yblocks[5] - 18 < 600 < yblocks[5] + 18 or \
+                xblocks[6] - 18 < player.rect.x < xblocks[6] + 18 and yblocks[6] - 18 < 600 < yblocks[6] + 18 or xblocks[6] - 18 < player.rect.x < xblocks[6] + 18 and yblocks[6] - 18 < 600 < yblocks[6] + 18:
+
+                    nohit = False
+
+
+            clock.tick(FPS)
+            screen.fill(black)
+
+
+            text = "Score: {0}".format(score)
+            score += 1
+            f = font.render(text, True, white)
+            (fwidth, fheight) = font.size(text)
+            screen.blit(f, (5, 5))
+
+
+            #print(xblocks, yblocks)
+            #print(player.rect.x)
+
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit(0)
+            players.update()
+            players.draw(screen)
+            block_group.update()
+            block_group.draw(screen)
+            pygame.display.flip()
         for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                pressed = pygame.key.get_pressed()
+                if pressed[pygame.K_RETURN]:
+                    main()
+                if pressed[pygame.K_ESCAPE]:
+                    pygame.quit()
+                    sys.exit(0)
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit(0)
-        players.update()
-        players.draw(screen)
-        block_group.update()
-        block_group.draw(screen)
+
+        clock.tick(FPS)
+        screen.fill(black)
+        atext = '''Game Over | Score: {0}'''.format(score)
+        f = font.render(atext, True, white)
+        (fwidth, fheight) = font.size(atext)
+        screen.blit(f, (113, 300))
+        btext = '''Press Enter to Restart | Press Esc to Quit'''
+        g = font.render(btext, True, white)
+        (fwidth, fheight) = font.size(atext)
+        screen.blit(g, (21, 350))
         pygame.display.flip()
+
+
 
 if __name__ == '__main__':
     main()
